@@ -19,10 +19,13 @@ I built this package for systems where an object must have one stable byte repre
 
 ## Installation
 
-The package is private while I finish the public release decision.
+The source repository is public. Registry publication is intentionally deferred, so the package remains marked private until a separate npm release gate is completed.
 
 ```bash
-bun add @frankfmy/canonical-json-fingerprint
+git clone https://github.com/FrankFMY/canonical-json-fingerprint.git
+cd canonical-json-fingerprint
+bun install --frozen-lockfile
+bun run verify
 ```
 
 ## Usage
@@ -72,6 +75,4 @@ bun run verify
 
 ## License
 
-Copyright © 2026 Artem Prianishnikov. All rights reserved.
-
-This repository is private and proprietary. See [LICENSE.md](LICENSE.md).
+MIT © 2026 Artem Prianishnikov. See [LICENSE](LICENSE).

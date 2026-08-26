@@ -2,7 +2,7 @@
 
 ## 0.1.0
 
-- Initial private package.
+- Initial public source release.
 - Strict canonical JSON serialization.
 - SHA-256 fingerprinting.
 - Cycle, sparse-array, accessor and non-plain-object rejection.

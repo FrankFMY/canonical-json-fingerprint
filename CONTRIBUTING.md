@@ -1,6 +1,6 @@
 # Contributing
 
-This repository is currently a private personal project maintained by Artem Prianishnikov.
+This repository is maintained by Artem Prianishnikov.
 
 For proposals, defects, or API discussions, open an issue with:
 
