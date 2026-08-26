@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "Strict canonical JSON serialization and deterministic SHA-256 fingerprints for TypeScript.",
   "type": "module",
-  "private": true,
   "sideEffects": false,
   "exports": {
     ".": {
@@ -14,13 +13,17 @@
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "SECURITY.md",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "check": "tsc -p tsconfig.json",
     "test": "bun test",
-    "verify": "bun run check && bun test && bun run build"
+    "verify": "bun run check && bun test && bun run build && bun run package:check",
+    "prepack": "bun run build",
+    "package:check": "node scripts/verify-package-contract.mjs"
   },
   "keywords": [
     "canonical-json",
@@ -53,5 +56,8 @@
     "@types/bun": "1.4.0",
     "@types/node": "^24.0.0",
     "typescript": "^6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
