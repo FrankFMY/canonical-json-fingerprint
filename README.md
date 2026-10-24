@@ -23,7 +23,7 @@ I built this package for systems where an object must have one stable byte repre
 npm install @frankfmy/canonical-json-fingerprint
 ```
 
-The first npm version is bootstrapped once from its clean exact tag with interactive account 2FA using `scripts/bootstrap-first-npm-release.sh`; subsequent releases use the repository's OIDC trusted publisher.
+The npm release is pending maintainer approval. Until it is public, clone this repository and run `bun install --frozen-lockfile && bun run build`, then install the tarball produced by `npm pack`. [npm package](https://www.npmjs.com/package/@frankfmy/canonical-json-fingerprint) · [source](https://github.com/FrankFMY/canonical-json-fingerprint).
 
 ## Usage
 
@@ -55,6 +55,8 @@ Returns the SHA-256 digest of the canonical representation as lowercase hexadeci
 
 This is intentionally not a general object serializer. It accepts plain JSON-shaped data only. It does not encode dates, maps, sets, typed arrays, class instances, custom `toJSON()` methods, or cyclic graphs.
 
+Runtime: ESM on Node.js 20+ or Bun 1.4+. The root module imports `node:crypto`; it is not a browser entry point. Key ordering uses JavaScript UTF-16 code-unit ordering and number formatting uses `JSON.stringify`. This is not a claim of RFC 8785/JCS compliance or a cryptographic audit. Hashes do not authenticate untrusted data. Supply inert plain data; proxies can execute traps and are not a sandboxed input domain.
+
 ## Development
 
 ```bash
@@ -68,7 +70,11 @@ bun run verify
 
 - GitHub: https://github.com/FrankFMY
 - Website: https://frankfmy.com
-- Email: Pryanishnikovartem@gmail.com
+- Email: Pryanishnikovartem@gmail.com · frankfmy@proton.me
+- Telegram: https://t.me/FrankFMY
+- LinkedIn: https://www.linkedin.com/in/frankfmy/
+- X: https://x.com/FrankFMY
+- npm: https://www.npmjs.com/~frankfmy
 
 ## License
 
