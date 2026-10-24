@@ -1,0 +1,15 @@
+import assert from "node:assert/strict";
+import { canonicalJsonFingerprint, serializeCanonicalJson } from "@frankfmy/canonical-json-fingerprint";
+assert.equal(serializeCanonicalJson({ z: [true, null], a: -0, absent: undefined }), '{"a":0,"z":[true,null]}');
+assert.equal(canonicalJsonFingerprint({ b: 2, a: 1 }), "43258cff783fe7036d8a43033f830adfc60ec037382473548ac742b888292777");
+assert.equal(canonicalJsonFingerprint({ a: 1, b: 2 }), canonicalJsonFingerprint({ b: 2, a: 1 }));
+const shared = { x: 1 };
+assert.equal(serializeCanonicalJson([shared, shared]), '[{"x":1},{"x":1}]');
+for (const value of [NaN, Infinity, 1n, new Date(), [undefined], Array(1)]) assert.throws(() => serializeCanonicalJson(value), TypeError);
+const cycle = {}; cycle.self = cycle;
+assert.throws(() => serializeCanonicalJson(cycle), /cyclic/);
+let reads = 0;
+const accessor = Object.defineProperty([1], 0, { get() { reads++; return 1; } });
+assert.throws(() => serializeCanonicalJson(accessor), /accessor/);
+assert.equal(reads, 0);
+console.log("installed canonical serialization/fingerprint/rejection consumer: PASS");

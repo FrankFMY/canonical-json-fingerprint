@@ -1,6 +1,6 @@
 {
   "name": "@frankfmy/canonical-json-fingerprint",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Strict canonical JSON serialization and deterministic SHA-256 fingerprints for TypeScript.",
   "type": "module",
   "sideEffects": false,
@@ -40,7 +40,7 @@
     "url": "https://frankfmy.com"
   },
   "license": "MIT",
-  "homepage": "https://frankfmy.com",
+  "homepage": "https://github.com/FrankFMY/canonical-json-fingerprint#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FrankFMY/canonical-json-fingerprint.git"

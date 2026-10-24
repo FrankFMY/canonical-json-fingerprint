@@ -14,8 +14,10 @@ const serialize = (value: unknown, ancestors: Set<object>): string => {
     try {
       const entries: string[] = [];
       for (let index = 0; index < value.length; index += 1) {
-        if (!Object.hasOwn(value, index)) throw new TypeError("Canonical JSON does not accept sparse arrays");
-        entries.push(serialize(value[index], ancestors));
+        const descriptor = Object.getOwnPropertyDescriptor(value, index);
+        if (!descriptor) throw new TypeError("Canonical JSON does not accept sparse arrays");
+        if (descriptor.get || descriptor.set) throw new TypeError("Canonical JSON does not accept accessor properties");
+        entries.push(serialize(descriptor.value, ancestors));
       }
       return `[${entries.join(",")}]`;
     } finally {

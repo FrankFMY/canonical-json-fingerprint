@@ -2,6 +2,16 @@ import { describe, expect, test } from "bun:test";
 import { canonicalJsonFingerprint, serializeCanonicalJson } from "../src/index.js";
 
 describe("serializeCanonicalJson", () => {
+  test("rejects array accessors without executing user code", () => {
+    let reads = 0;
+    const value = Object.defineProperty([1], 0, {
+      enumerable: true,
+      get: () => { reads += 1; return 1; },
+    });
+    expect(() => serializeCanonicalJson(value)).toThrow("accessor");
+    expect(reads).toBe(0);
+  });
+
   test("produces one representation for equivalent plain JSON", () => {
     expect(serializeCanonicalJson({ z: [3, { b: true, a: "x" }], a: null })).toBe('{"a":null,"z":[3,{"a":"x","b":true}]}');
     expect(serializeCanonicalJson({ ignored: undefined, b: 2, a: 1 })).toBe('{"a":1,"b":2}');
